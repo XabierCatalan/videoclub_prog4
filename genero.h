@@ -8,6 +8,11 @@
 #ifndef GENERO_H_
 #define GENERO_H_
 
+typedef struct {
+	int cod_genero;
+	char *nombre_genero;
+
+}Genero;
 
 
 #endif /* GENERO_H_ */
