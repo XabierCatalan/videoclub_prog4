@@ -11,7 +11,7 @@ int main() {
         printf("3. Mostrar todas las películas\n");
         printf("4. Salir del programa\n");
         printf("\nIngrese una opción: ");
-        scanf("%d", &opcion);
+        scanf("%i", &opcion);
 
         if (opcion == 1) {
 
@@ -25,7 +25,7 @@ int main() {
                 break;
         } else if (opcion == 3){
 
-            case 3:
+
                 printf("\nHa seleccionado la opción 3: Mostrar todas las películas\n");
                 // Aquí iría el código para mostrar todas las películas
                 break;
