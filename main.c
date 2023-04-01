@@ -13,29 +13,25 @@ int main() {
         printf("\nIngrese una opción: ");
         scanf("%d", &opcion);
 
-        if (opcion == 1) {
-
+        switch(opcion) {
+            case 1:
                 printf("\nHa seleccionado la opción 1: Agregar una película\n");
                 // Aquí iría el código para agregar una película
                 break;
-        } else if (opcion == 2) {
-
+            case 2:
                 printf("\nHa seleccionado la opción 2: Eliminar una película\n");
                 // Aquí iría el código para eliminar una película
                 break;
-        } else if (opcion == 3){
-
             case 3:
                 printf("\nHa seleccionado la opción 3: Mostrar todas las películas\n");
                 // Aquí iría el código para mostrar todas las películas
                 break;
-        } else if (opcion == 4) {
-
+            case 4:
                 printf("\nHa seleccionado la opción 4: Salir del programa\n");
                 break;
-           // default:
-           // printf("\nOpción no válida. Intente de nuevo.\n");
-           // break;
+            default:
+                printf("\nOpción no válida. Intente de nuevo.\n");
+                break;
         }
     } while(opcion != 4);
 
