@@ -11,7 +11,6 @@
 typedef struct {
 	int cod_formato;
 	char *nombre_formato;
-
 }Formato;
 
 #endif /* FORMATO_H_ */

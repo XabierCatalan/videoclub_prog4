@@ -1,11 +1,12 @@
 
 
 #include <stdio.h>
+#include "menus/menus.h"
 
 int main(void) {
-
-	printf("hola");
-
-
+	menuPrincipal();
+	printf("aaaa");
 	return 0;
+
 }
+
