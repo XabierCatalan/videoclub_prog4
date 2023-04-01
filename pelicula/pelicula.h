@@ -10,7 +10,7 @@
 
 typedef struct {
 	int id_pelicula;
-	char *nombre;
+	char *titulo;
 	int cod_genero;  //crear una tabla en la base de datos con cod_genero y genero
 	char *director;
 	int cod_formato;  //crear una tabla en la base de datos con cod_formato y formato
@@ -18,6 +18,8 @@ typedef struct {
 	float precio;
 
 }Pelicula;
+
+
 
 
 #endif /* PELICULA_H_ */
