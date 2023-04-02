@@ -9,11 +9,10 @@
 #include <stdio.h>
 
 void menuPrincipal(){
-	int opcion;
+	char opcion;
 
 	do{
-		printf("\n");
-		printf("[MENU ADMINISTRADOR] \n");
+		printf("\n[MENU ADMINISTRADOR] \n");
 		printf("--------------------------\n");
 		printf("1. Cargar datos.\n");
 		printf("2. Insertar pelicula.\n");
@@ -22,41 +21,41 @@ void menuPrincipal(){
 		printf("5.Salir\n");
 		printf("Introduce una opcion del menu: \n");
 		fflush(stdout);
-		scanf("%i", &opcion);
+		scanf("%s", &opcion);
 
 		switch(opcion) {
-			case 1:
+			case '1':
 
-			printf("La opcion elegida es 1.");
+			printf("La opcion elegida es 1.\n");
 			break;
 
-			case 2:
+			case '2':
 
-			printf("La opcion elegida es 2.");
+			printf("La opcion elegida es 2.\n");
 			break;
 
-			case 3:
+			case '3':
 
-			printf("La opcion elegida es 3.");
+			printf("La opcion elegida es 3.\n");
 			break;
 
-			case 4:
+			case '4':
 
-			printf("La opcion elegida es 4.");
+			printf("La opcion elegida es 4.\n");
 			break;
 
-			case 5:
+			case '5':
 
-			printf("La opcion elegida es 5.");
+			printf("La opcion elegida es 5.\n");
 			break;
 
 			default:
 
-			printf("SELECCIONA UNA OPCION VALIDA.\n");
+			printf("\nSELECCIONA UNA OPCION VALIDA.\n");
 			break;
 
 		}
 
-	} while( opcion =! 5);
+	} while( opcion != '5');
 
 }
