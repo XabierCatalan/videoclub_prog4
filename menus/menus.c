@@ -7,7 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "sql/sql.h"
+#include "../sql/sql.h"
 
 void menuPrincipal(){
 	char opcion;
