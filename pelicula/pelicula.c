@@ -7,20 +7,25 @@
 #include "pelicula.h"
 #include <string.h>
 #include <stdio.h>
+#include "../sql/sql.h"
 
 
 void imprimirPeliculas(Pelicula *p, int t){
+	inicializar();
+
 	for (int i = 0; i < t; ++i) {
 		int id = p[i].id_pelicula;
 
-		int cod_gen = p[i].cod_genero; //meter buscar codigo de genero
-		int cod_formato = p[i].cod_formato; //meter buscar codigo de formato
+		char* gen = buscarGenero(p[i].cod_genero); //meter buscar codigo de genero
+		char* form = buscarFormato(p[i].cod_formato); //meter buscar codigo de formato
 		float precio = p[i].precio;
 
-		printf("Id_ Pelicula: %i  Titulo: %s Genero: %i  Director %s  Formato: %i Fecha: %s Precio: %.2f \n",
-				id, p[i].titulo, cod_gen, p[i].director, cod_formato, p[i].fecha_sal, precio);
+		printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Fecha: %s | Precio: %.2f \n",
+				id, p[i].titulo, gen, p[i].director, form, p[i].fecha_sal, precio);
 
 	}
+
+	cerrar();
 
 
 }

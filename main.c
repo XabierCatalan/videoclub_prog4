@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include "menus/menus.h"
 #include "pelicula/pelicula.h"
+#include "sql/sql.h"
 
 int main(void) {
-	menuPrincipal();
+	//menuPrincipal();
 
 //	Pelicula *p;
 //	p = (Pelicula*) malloc(sizeof(Pelicula)*2);
@@ -17,9 +18,9 @@ int main(void) {
 //	p[0] = peli;
 //	p[1] = peli2;
 //
-//	imprimirPeliculas(p, 2);
+// 	imprimirPeliculas(p, 2);
 
-
+	contarPeliculas();
 	return 0;
 
 }

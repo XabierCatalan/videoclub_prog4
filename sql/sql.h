@@ -7,10 +7,22 @@
 
 #ifndef SQL_H_
 #define SQL_H_
+#include "../pelicula/pelicula.h"
+
 
 void inicializar();
 
 void cargarPeliculas();
+
+char* buscarGenero (int cod_gen);
+
+char* buscarFormato (int cod_for);
+
+void insertarPelicula(Pelicula p);
+
+void borrarPelicula(int id);
+
+void contarPeliculas();
 
 void cerrar();
 

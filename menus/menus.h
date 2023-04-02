@@ -12,4 +12,6 @@
 
 void menuPrincipal();
 
+void menuInsertar();
+
 #endif /* MENUS_MENUS_H_ */
