@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "sql/sql.h"
 
 void menuPrincipal(){
 	char opcion;
@@ -27,6 +28,9 @@ void menuPrincipal(){
 			case '1':
 
 			printf("La opcion elegida es 1.\n");
+			inicializar();
+			cargarPeliculas();
+			cerrar();
 			break;
 
 			case '2':
