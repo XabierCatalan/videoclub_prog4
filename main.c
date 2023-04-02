@@ -20,9 +20,9 @@ int main(void) {
 //
 // 	imprimirPeliculas(p, 2);
 
-	int num_pelis = contarPeliculas();
-	printf("%i", num_pelis);
-	return 0;
+//	int num_pelis = contarPeliculas();
+//	printf("%i", num_pelis);
+//	return 0;
 
 }
 

@@ -57,7 +57,7 @@ void cargarPeliculas()
 
 			if (result == SQLITE_ROW) {
 
-
+				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1) );
 			}
 		}  while (result == SQLITE_ROW);
 
