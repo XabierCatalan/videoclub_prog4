@@ -13,7 +13,7 @@ void inicializar();
 	sqlite3_stmt *stmt;
 	int result;
 
-	sqlite3_open("BDD Prog.db", &db);
+	sqlite3_open("BDD_Prog.db", &db);
 }
 
 void cargarPeliculas();
