@@ -40,5 +40,10 @@ void cargarPeliculas()
 
 }
 
+void cerrar()
+{
+	sqlite3_close(db);
+}
+
 
 

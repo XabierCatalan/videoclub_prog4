@@ -12,4 +12,8 @@ void inicializar();
 
 void cargarPeliculas();
 
+void cerrar();
+
+
+
 #endif /* SQL_H_ */
