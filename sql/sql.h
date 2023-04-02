@@ -8,6 +8,8 @@
 #ifndef SQL_H_
 #define SQL_H_
 
+void inicializar();
 
+void cargarPeliculas();
 
 #endif /* SQL_H_ */
