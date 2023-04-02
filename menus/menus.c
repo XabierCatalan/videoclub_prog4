@@ -58,6 +58,16 @@ void menuInsertar() {
 
 }
 
+void menuEliminar(){
+	int id_Pelicula;
+	printf("Introduzca el Id_Pelicula de la pelicula que desee Eliminar: \n");
+	fflush(stdout);
+	scanf("%i", &id_Pelicula);
+	borrarPelicula(id_Pelicula);
+
+}
+
+
 
 void menuPrincipal(){
 	char opcion;
@@ -97,6 +107,7 @@ void menuPrincipal(){
 			case '4':
 
 			printf("La opcion elegida es 4.\n");
+				menuEliminar();
 			break;
 
 			case '5':

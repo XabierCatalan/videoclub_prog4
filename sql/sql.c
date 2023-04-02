@@ -21,21 +21,28 @@ void inicializar()
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 
-void contarPeliculas(){
+int contarPeliculas(){
 	char sql[] = "select count(*) from Peliculas";
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
 
-	char* num_pelis = (char*) sqlite3_column_text(stmt, 0);
+	result = sqlite3_step(stmt) ;
 
 
 	sqlite3_finalize(stmt);
 
-}
+	return result +1;
 
+}
 
 void cargarPeliculas()
 {
-	char sql[] = "select Titulo_Pelicula from Peliculas";
+	char sql[] = "select * from Peliculas";
+
+//	int num_pelis = contarPeliculas();
+//	int cont = 0;
+//
+//	Pelicula *pelis;
+//	pelis = (Pelicula*) malloc(sizeof(Pelicula)*num_pelis);
 
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
 
@@ -44,15 +51,43 @@ void cargarPeliculas()
 
 	do {
 			result = sqlite3_step(stmt) ;
-			if (result == SQLITE_ROW) {
-				printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
-			}
-		} while (result == SQLITE_ROW);
-		printf("\n");
 
-		sqlite3_finalize(stmt);
+
+
+
+			if (result == SQLITE_ROW) {
+
+
+			}
+		}  while (result == SQLITE_ROW);
+
+	printf("\n");
+
+	 sqlite3_finalize(stmt);
 
 }
+
+
+//void cargarPeliculas()
+//{
+//	char sql[] = "select Titulo_Pelicula from Peliculas";
+//
+//	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+//
+//	printf("\n");
+//	printf("Mostrando peliculas:\n");
+//
+//	do {
+//			result = sqlite3_step(stmt) ;
+//			if (result == SQLITE_ROW) {
+//				printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
+//			}
+//		} while (result == SQLITE_ROW);
+//		printf("\n");
+//
+//		sqlite3_finalize(stmt);
+//
+//}
 
 char* buscarGenero (int cod_gen)
 {
@@ -137,7 +172,10 @@ void insertarPelicula(Pelicula p) {
 
 void borrarPelicula(int id){
 	char sql[] = "delete from Peliculas where Id_Pelicula = ?";
+	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+
 	sqlite3_bind_int(stmt,1,id);
+
 
 	result = sqlite3_step(stmt);
 		if (result != SQLITE_DONE) {

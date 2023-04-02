@@ -20,9 +20,9 @@ char* buscarFormato (int cod_for);
 
 void insertarPelicula(Pelicula p);
 
-void borrarPelicula(int id);
+int borrarPelicula(int id);
 
-void contarPeliculas();
+int contarPeliculas();
 
 void cerrar();
 

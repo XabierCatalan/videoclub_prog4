@@ -14,4 +14,7 @@ void menuPrincipal();
 
 void menuInsertar();
 
+void menuEliminar();
+
+
 #endif /* MENUS_MENUS_H_ */

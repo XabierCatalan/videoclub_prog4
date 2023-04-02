@@ -7,7 +7,7 @@
 #include "sql/sql.h"
 
 int main(void) {
-	//menuPrincipal();
+	menuPrincipal();
 
 //	Pelicula *p;
 //	p = (Pelicula*) malloc(sizeof(Pelicula)*2);
@@ -20,7 +20,8 @@ int main(void) {
 //
 // 	imprimirPeliculas(p, 2);
 
-	contarPeliculas();
+	int num_pelis = contarPeliculas();
+	printf("%i", num_pelis);
 	return 0;
 
 }
