@@ -7,7 +7,7 @@
 
 #include "sqlite3.h"
 
-void inicializar();
+void inicializar()
 {
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
@@ -16,7 +16,10 @@ void inicializar();
 	sqlite3_open("BDD Prog.db", &db);
 }
 
-void cargarPeliculas();
+void cargarPeliculas()
+{
+
+}
 
 
 
