@@ -20,6 +20,6 @@ typedef struct {
 }Pelicula;
 
 
-
+void imprimirPeliculas(Pelicula *p, int t);
 
 #endif /* PELICULA_H_ */
