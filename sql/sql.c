@@ -14,12 +14,20 @@
 
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
+	sqlite3_stmt *stmt2;
+
 	int result;
 
 void inicializar()
 {
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
+
+void cerrar()
+{
+	sqlite3_close(db);
+}
+
 
 //METODO DE CONTAR EL NUMERO DE PELICULAS
 
@@ -97,22 +105,34 @@ void cargarPeliculas()
 //METODODOS DE ACTUALIZAR PELICULAS
 
 void actualizarTitulo(char* titulo, int id_pelicula){
-	char sql[] = "update Peliculas set Titulo_Pelicula = ?,  where Id_Pelicula = ? ";
-	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
-	sqlite3_bind_text(stmt, 1, titulo, strlen(titulo), SQLITE_STATIC);
-	sqlite3_bind_int(stmt,2,id_pelicula);
+
+	char sql[] = "UPDATE Peliculas SET Titulo_Pelicula = ? where Id_Pelicula = ?";
+
+	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+	sqlite3_bind_text(stmt, 1, titulo, strlen(titulo), SQLITE_TRANSIENT);
+	sqlite3_bind_int(stmt, 2, id_pelicula);
+
+	 if (result != SQLITE_OK) {
+	    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+	  }
 
 	result = sqlite3_step(stmt);
-		if (result != SQLITE_DONE) {
-			printf("Error actualizando titulo de la pelicula\n");
-		}else{
-			printf("titulo actualizado\n");
 
-		}
+	if (result != SQLITE_DONE) {
+		fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
 
-		sqlite3_finalize(stmt);
+	  } else {
+		 printf("titulo actualizado\n");
+
+	  }
+
+	  sqlite3_finalize(stmt);
 
 }
+
+
+
 
 void actualizarGenero(int genero, int id_pelicula){
 
@@ -151,6 +171,8 @@ Pelicula* buscarPelicula(int id){
 	p->cod_formato = sqlite3_column_int(stmt, 4);
 	p->precio = sqlite3_column_double(stmt, 5);
 	p->cantidad = sqlite3_column_int(stmt, 6);
+
+	sqlite3_finalize(stmt);
 
 	return p;
 
@@ -264,10 +286,6 @@ void borrarPelicula(int id){
 
 
 
-void cerrar()
-{
-	sqlite3_close(db);
-}
 
 
 

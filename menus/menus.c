@@ -88,11 +88,16 @@ void menuModificar() {
 
 	switch(opcion1) {
 		case '1':
-			printf("\n Inserte el nuevo Titulo de la pelicula:\n");
-			char *titulo = NULL;
+			printf("Inserte el nuevo Titulo de la pelicula:\n");
+			char *titulo;
+			titulo = (char*) malloc(sizeof(char)*50);
+
 			fflush(stdout);
 			scanf("%s", titulo);
+
 			actualizarTitulo(titulo, id_Pelicula);
+			Pelicula* p = buscarPelicula(id_Pelicula);
+			imprimirPeliculas(p, 1);
 			break;
 
 		case '2':
