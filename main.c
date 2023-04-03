@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "menus/menus.h"
 #include "pelicula/pelicula.h"
+#include "sql/sql.h"
 
 int main(void) {
 	menuPrincipal();
@@ -17,10 +18,11 @@ int main(void) {
 //	p[0] = peli;
 //	p[1] = peli2;
 //
-//	imprimirPeliculas(p, 2);
+// 	imprimirPeliculas(p, 2);
 
-
-	return 0;
+//	int num_pelis = contarPeliculas();
+//	printf("%i", num_pelis);
+//	return 0;
 
 }
 
