@@ -7,7 +7,7 @@
 #include <stdio.h>
 enum LogLevel { DEBUG, INFO, WARN, ERROR };
 
-void log(enum LogLevel level, const char* message) {
+void hola(enum LogLevel level, const char* message) {
   switch (level) {
     case DEBUG:
       printf("[DEBUG] %s\n", message);

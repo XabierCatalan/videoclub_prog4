@@ -5,6 +5,7 @@
 #include "menus/menus.h"
 #include "pelicula/pelicula.h"
 #include "sql/sql.h"
+#include "logger/logger.c"
 
 int main(void) {
 	menuPrincipal();
