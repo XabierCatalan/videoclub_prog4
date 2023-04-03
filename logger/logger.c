@@ -5,21 +5,14 @@
  *      Author: Usuario
  */
 #include <stdio.h>
-enum LogLevel { DEBUG, INFO, WARN, ERROR };
 
-void hola(enum LogLevel level, const char* message) {
-  switch (level) {
-    case DEBUG:
-      printf("[DEBUG] %s\n", message);
-      break;
-    case INFO:
-      printf("[INFO] %s\n", message);
-      break;
-    case WARN:
-      printf("[WARN] %s\n", message);
-      break;
-    case ERROR:
-      printf("[ERROR] %s\n", message);
-      break;
-  }
+
+void mensaje_log(char *mensaje, char *archivo) {
+    FILE *log_file = fopen(archivo, "a"); // abre el archivo en modo de escritura (append)
+    if (log_file == NULL) {
+        printf("No se pudo abrir el archivo de registro.\n");
+        return;
+    }
+    fprintf(log_file, "Error: %s\n", mensaje); // escribe el mensaje de error en el archivo
+    fclose(log_file); // cierra el archivo
 }
