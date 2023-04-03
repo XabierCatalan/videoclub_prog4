@@ -24,6 +24,8 @@ int borrarPelicula(int id);
 
 int contarPeliculas();
 
+Pelicula* buscarPelicula(int id);
+
 void cerrar();
 
 

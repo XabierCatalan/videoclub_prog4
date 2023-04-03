@@ -20,8 +20,8 @@ void imprimirPeliculas(Pelicula *p, int t){
 		char* form = buscarFormato(p[i].cod_formato); //meter buscar codigo de formato
 		float precio = p[i].precio;
 
-		printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Fecha: %s | Precio: %.2f \n",
-				id, p[i].titulo, gen, p[i].director, form, p[i].fecha_sal, precio);
+		printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f \n",
+				id, p[i].titulo, gen, p[i].director, form, precio);
 
 	}
 

@@ -89,6 +89,27 @@ void cargarPeliculas()
 //
 //}
 
+Pelicula* buscarPelicula(int id){
+	char sql[] = "select * from Peliculas where Id_Pelicula = ?";
+	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+	sqlite3_bind_int(stmt,1,id);
+
+	result = sqlite3_step(stmt) ;
+
+	Pelicula* p ;
+	p = (Pelicula*) malloc(sizeof(Pelicula));
+	p->id_pelicula = id;
+	p->titulo = (char*) sqlite3_column_text(stmt, 1);
+	p->cod_genero = sqlite3_column_int(stmt, 2);
+	p->director = (char*) sqlite3_column_text(stmt, 3);
+	p->cod_formato = sqlite3_column_int(stmt, 4);
+	p->precio = sqlite3_column_double(stmt, 5);
+
+	return p;
+
+}
+
+
 char* buscarGenero (int cod_gen)
 {
 	char* gen;

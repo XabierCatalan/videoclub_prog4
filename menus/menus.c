@@ -17,8 +17,7 @@ void menuInsertar() {
 	char *director;
 	director = (char*) malloc(sizeof(char)*30);
 	int cod_form;
-	char *fecha;
-	fecha = (char*) malloc(sizeof(char)*30);
+
 
 	float precio;
 
@@ -41,18 +40,13 @@ void menuInsertar() {
 	scanf("%i", &cod_form);
 
 
-	printf("fecha de Estreno(yyyy/mm/dd): \n");
-	fflush(stdout);
-	scanf("%s", fecha);
-
-
 	printf("Introduzca el Precio de la pelicula: \n");
 	fflush(stdout);
 	scanf("%f", &precio);
 
 
 
-	Pelicula p = {0, titulo, cod_gen, director, cod_form, fecha, precio};
+	Pelicula p = {0, titulo, cod_gen, director, cod_form, precio};
 
 	insertarPelicula(p);
 
@@ -65,6 +59,15 @@ void menuEliminar(){
 	scanf("%i", &id_Pelicula);
 	borrarPelicula(id_Pelicula);
 
+}
+
+void menuModificar() {
+	int id_Pelicula;
+	printf("Introduzca el Id_Pelicula de la pelicula que desee Modificar: \n");
+	fflush(stdout);
+	scanf("%i", &id_Pelicula);
+	Pelicula* p = buscarPelicula(id_Pelicula);
+	imprimirPeliculas(p, 1);
 }
 
 void menuPrincipal(){
@@ -99,7 +102,8 @@ void menuPrincipal(){
 
 			case '3':
 
-			printf("La opcion elegida es 3.\n");
+				printf("La opcion elegida es 3.\n");
+				menuModificar();
 			break;
 
 			case '4':
