@@ -17,9 +17,8 @@ void menuInsertar() {
 	char *director;
 	director = (char*) malloc(sizeof(char)*30);
 	int cod_form;
-
-
 	float precio;
+	int cantidad;
 
 	printf("Introduzca el titulo: \n");
 	fflush(stdout);
@@ -44,9 +43,13 @@ void menuInsertar() {
 	fflush(stdout);
 	scanf("%f", &precio);
 
+	printf("Introduzca la cantidad de Stock pelicula: \n");
+	fflush(stdout);
+	scanf("%i", &cantidad);
 
 
-	Pelicula p = {0, titulo, cod_gen, director, cod_form, precio};
+
+	Pelicula p = {0, titulo, cod_gen, director, cod_form, precio, cantidad};
 
 	insertarPelicula(p);
 

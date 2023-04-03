@@ -15,6 +15,7 @@ typedef struct {
 	char *director;
 	int cod_formato;  //crear una tabla en la base de datos con cod_formato y formato
 	float precio;
+	int cantidad;
 
 }Pelicula;
 

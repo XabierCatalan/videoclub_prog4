@@ -150,6 +150,7 @@ Pelicula* buscarPelicula(int id){
 	p->director = (char*) sqlite3_column_text(stmt, 3);
 	p->cod_formato = sqlite3_column_int(stmt, 4);
 	p->precio = sqlite3_column_double(stmt, 5);
+	p->cantidad = sqlite3_column_int(stmt, 6);
 
 	return p;
 
@@ -218,7 +219,7 @@ char* buscarFormato (int cod_for){
 
 void insertarPelicula(Pelicula p) {
 	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio"
-			") values (NULL, ?,?,?,?,?)";
+			") values (NULL, ?,?,?,?,?,?)";
 
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
 	sqlite3_bind_text(stmt, 1, p.titulo, strlen(p.titulo), SQLITE_STATIC);
@@ -226,6 +227,7 @@ void insertarPelicula(Pelicula p) {
 	sqlite3_bind_text(stmt, 3, p.director, strlen(p.director), SQLITE_STATIC);
 	sqlite3_bind_int(stmt,4,p.cod_formato);
 	sqlite3_bind_double(stmt,5,p.precio);
+	sqlite3_bind_double(stmt,6,p.cantidad);
 
 	result = sqlite3_step(stmt);
 		if (result != SQLITE_DONE) {
