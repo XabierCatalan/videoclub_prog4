@@ -14,7 +14,7 @@
 
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
-	sqlite3_stmt *stmt2;
+
 
 	int result;
 
