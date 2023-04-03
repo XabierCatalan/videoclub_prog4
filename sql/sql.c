@@ -21,6 +21,8 @@ void inicializar()
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 
+//METODO DE CONTAR EL NUMERO DE PELICULAS
+
 int contarPeliculas(){
 	char sql[] = "select count(*) from Peliculas";
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
@@ -33,6 +35,8 @@ int contarPeliculas(){
 	return result +1;
 
 }
+
+//METODO DE CARGAR PELICULAS
 
 void cargarPeliculas()
 {
@@ -88,6 +92,48 @@ void cargarPeliculas()
 //		sqlite3_finalize(stmt);
 //
 //}
+
+
+//METODODOS DE ACTUALIZAR PELICULAS
+
+void actualizarTitulo(char* titulo, int id_pelicula){
+	char sql[] = "update Peliculas set Titulo_Pelicula = ? where Id_Pelicula = ? ";
+	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+	sqlite3_bind_text(stmt, 1, titulo, strlen(titulo), SQLITE_STATIC);
+	sqlite3_bind_int(stmt,2,id_pelicula);
+
+	result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			printf("Error actualizando titulo de la pelicula\n");
+		}else{
+			printf("titulo actualizado\n");
+
+		}
+
+		sqlite3_finalize(stmt);
+
+}
+
+void actualizarGenero(int genero, int id_pelicula){
+
+}
+
+void actualizarDirector(char* Director, int id_pelicula){
+
+}
+
+void actualizarFormato(int formato, int id_pelicula){
+
+}
+
+void actualizarPrecio(float precio, int id_pelicula){
+
+}
+
+
+
+
+//METODOS DE BUSCAR
 
 Pelicula* buscarPelicula(int id){
 	char sql[] = "select * from Peliculas where Id_Pelicula = ?";
@@ -168,6 +214,8 @@ char* buscarFormato (int cod_for){
 		sqlite3_finalize(stmt);
 }
 
+//METODO DE INSERTAR PELICULAS
+
 void insertarPelicula(Pelicula p) {
 	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio"
 			") values (NULL, ?,?,?,?,?)";
@@ -190,6 +238,8 @@ void insertarPelicula(Pelicula p) {
 		sqlite3_finalize(stmt);
 
 }
+
+//METODO DE BORRAR PELICULAS
 
 void borrarPelicula(int id){
 	char sql[] = "delete from Peliculas where Id_Pelicula = ?";
