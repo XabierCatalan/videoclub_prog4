@@ -67,8 +67,6 @@ void menuEliminar(){
 
 }
 
-
-
 void menuPrincipal(){
 	char opcion;
 
