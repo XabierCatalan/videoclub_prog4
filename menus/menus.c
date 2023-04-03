@@ -96,27 +96,66 @@ void menuModificar() {
 			scanf("%s", titulo);
 
 			actualizarTitulo(titulo, id_Pelicula);
-			Pelicula* p = buscarPelicula(id_Pelicula);
+
 			imprimirPeliculas(p, 1);
 			break;
 
 		case '2':
-			printf("\n Seleccione el nuevo Genero de la pelicula:\n");
+			printf("Seleccione el nuevo Genero de la pelicula:\n");
+			printf("1. Accion\n");
+			printf("2. Aventura\n");
+			printf("3. Ciencia Ficcion\n");
+			printf("4. Comedia\n");
+			printf("5. Documentales\n");
+			printf("6. Drama\n");
+			printf("7. Fantasia\n");
+			printf("8. Musical\n");
+			printf("9. Suspense\n");
+			printf("10. Terror\n");
+			int g;
+			fflush(stdout);
+			scanf("%i", &g);
+
+			actualizarGenero(g, id_Pelicula);
 
 			break;
 
 		case '3':
-			printf("\n Inserte el nuevo Director de la pelicula:\n");
+			printf("Inserte el nuevo Director de la pelicula:\n");
+			char *director;
+			director = (char*) malloc(sizeof(char)*50);
 
+			fflush(stdout);
+			scanf("%s", director);
+
+			actualizarDirector(director, id_Pelicula);
+
+			imprimirPeliculas(p, 1);
 			break;
 
 		case '4':
-			printf("\n Seleccion el nuevo Formato de la pelicula:\n");
+
+			printf("Seleccion el nuevo Formato de la pelicula:\n");
+			printf("1. DVD\n");
+			printf("2. Blu-Ray\n");
+			printf("3. VHS\n");
+			int f;
+			fflush(stdout);
+			scanf("%i", &f);
+
+			actualizarFormato(f, id_Pelicula);
+
 
 			break;
 
 		case '5':
+
 			printf("\n Inserte el nuevo Precio de la pelicula:\n");
+			float p;
+			fflush(stdout);
+			scanf("%f", &p);
+
+			actualizarPrecio(p, id_Pelicula);
 
 			break;
 
