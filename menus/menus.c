@@ -59,6 +59,7 @@ void menuEliminar(){
 	scanf("%i", &id_Pelicula);
 	borrarPelicula(id_Pelicula);
 
+
 }
 
 void menuModificar() {

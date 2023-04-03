@@ -97,7 +97,7 @@ void cargarPeliculas()
 //METODODOS DE ACTUALIZAR PELICULAS
 
 void actualizarTitulo(char* titulo, int id_pelicula){
-	char sql[] = "update Peliculas set Titulo_Pelicula = ? where Id_Pelicula = ? ";
+	char sql[] = "update Peliculas set Titulo_Pelicula = ?,  where Id_Pelicula = ? ";
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
 	sqlite3_bind_text(stmt, 1, titulo, strlen(titulo), SQLITE_STATIC);
 	sqlite3_bind_int(stmt,2,id_pelicula);
