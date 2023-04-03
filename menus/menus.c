@@ -171,6 +171,8 @@ void menuModificar() {
 void menuPrincipal(){
 	char opcion;
 
+	inicializar();
+
 	do{
 		printf("\n[MENU ADMINISTRADOR] \n");
 		printf("--------------------------\n");
@@ -187,7 +189,7 @@ void menuPrincipal(){
 			case '1':
 
 			printf("La opcion elegida es 1.\n");
-			inicializar();
+
 			cargarPeliculas();
 
 			break;

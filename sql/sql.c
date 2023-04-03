@@ -18,8 +18,34 @@
 
 	int result;
 
+char** config(){
+	   FILE* f;
+	   char c;
+	   char** bdd;
+	   int fila = 0;
+    int letra = 0;
+    f = fopen("prueba.txt", "r");
+    //leer mientras no se llegue al final del fichero EOF
+    while ((c = fgetc(f)) != EOF)
+        {
+    	if(c=='\n'){
+	               fila++;
+	               letra=0;
+	            } else {
+	                bdd[fila][letra]=c;
+	                letra++;
+	            }
+
+	        }
+	    //cerrar fichero
+	        fclose(f);
+
+	      return bdd;
+	}
+
 void inicializar()
 {
+
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 

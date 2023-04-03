@@ -11,7 +11,7 @@
 
 
 void imprimirPeliculas(Pelicula *p, int t){
-	inicializar();
+
 
 	for (int i = 0; i < t; ++i) {
 		int id = p[i].id_pelicula;
@@ -25,7 +25,6 @@ void imprimirPeliculas(Pelicula *p, int t){
 
 	}
 
-	cerrar();
 
 
 }
