@@ -232,6 +232,8 @@ void cargarPeliculas()
 
 void actualizarTitulo(char* titulo, int id_pelicula){
 
+	char error = 0;
+
 	char sql[] = "UPDATE Peliculas SET Titulo_Pelicula = ? where Id_Pelicula = ?";
 
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
@@ -243,7 +245,7 @@ void actualizarTitulo(char* titulo, int id_pelicula){
 
 	  }
 
-	result = sqlite3_step(stmt);
+	result = sqlite3_exec(db, stmt, 0, 0, &error);
 
 	if (result != SQLITE_DONE) {
 		fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
