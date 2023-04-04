@@ -15,6 +15,7 @@
 
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
+	sqlite3_stmt *stmt2;
 
 
 	int result;
@@ -81,6 +82,64 @@ int comprobarAdmin(char admin[], char contra[]){
 	    return resultado;
 }
 
+char* buscarGenero (int cod_gen)
+{
+	char* gen;
+
+	char sql[] = "select Nombre_Gen from Generos where Cod_Gen = ?";
+
+	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt2, NULL) ;
+	sqlite3_bind_int(stmt2,1,cod_gen);
+
+
+//	printf("\n");
+//	printf("Buscando Genero:\n");
+
+
+	result = sqlite3_step(stmt2) ;
+	if (result == SQLITE_ROW) {
+		//printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
+		gen = (char*) sqlite3_column_text(stmt2, 0);
+
+		return gen;
+
+		} else {
+
+			return gen = "Genero no encontrado";
+		}
+
+	sqlite3_finalize(stmt2);
+
+}
+
+char* buscarFormato (int cod_for){
+	char* form;
+
+		char sql[] = "select Nombre_For from Formato where Cod_For = ?";
+
+		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt2, NULL) ;
+		sqlite3_bind_int(stmt2,1,cod_for);
+
+
+//		printf("\n");
+//		printf("Buscando formato:\n");
+
+
+		result = sqlite3_step(stmt2) ;
+		if (result == SQLITE_ROW) {
+			//printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
+			form = (char*) sqlite3_column_text(stmt2, 0);
+
+			return form;
+
+			} else {
+
+				return form = "formato no encontrado";
+			}
+
+		sqlite3_finalize(stmt2);
+}
+
 //METODO DE CONTAR EL NUMERO DE PELICULAS
 
 int contarPeliculas(){
@@ -124,12 +183,13 @@ void cargarPeliculas()
 
 //				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
 
-				int cod_gen = sqlite3_column_int(stmt, 2);
-				int cod_for = sqlite3_column_int(stmt, 4);
 
-				printf("Id_Pelicula: %i | Titulo: %s | Genero: %i | Director: %s | Formato: %i | Precio: %.2f | Cantidad: %i \n ",
-						sqlite3_column_int(stmt,0), (char*) sqlite3_column_text(stmt, 1), sqlite3_column_int(stmt, 2),
-						(char*) sqlite3_column_text(stmt, 3), sqlite3_column_int(stmt, 4), sqlite3_column_double(stmt, 5),
+
+
+
+				printf("Id_Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n ",
+						sqlite3_column_int(stmt,0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2)),
+						(char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
 						sqlite3_column_int(stmt, 6));
 
 //				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
@@ -333,63 +393,9 @@ Pelicula* buscarPelicula(int id){
 }
 
 
-char* buscarGenero (int cod_gen)
-{
-	char* gen;
-
-	char sql[] = "select Nombre_Gen from Generos where Cod_Gen = ?";
-
-	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
-	sqlite3_bind_int(stmt,1,cod_gen);
 
 
-//	printf("\n");
-//	printf("Buscando Genero:\n");
 
-
-	result = sqlite3_step(stmt) ;
-	if (result == SQLITE_ROW) {
-		//printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
-		gen = (char*) sqlite3_column_text(stmt, 0);
-
-		return gen;
-
-		} else {
-
-			return gen = "Genero no encontrado";
-		}
-
-	sqlite3_finalize(stmt);
-
-}
-
-char* buscarFormato (int cod_for){
-	char* form;
-
-		char sql[] = "select Nombre_For from Formato where Cod_For = ?";
-
-		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
-		sqlite3_bind_int(stmt,1,cod_for);
-
-
-//		printf("\n");
-//		printf("Buscando formato:\n");
-
-
-		result = sqlite3_step(stmt) ;
-		if (result == SQLITE_ROW) {
-			//printf("%s\n", (char*) sqlite3_column_text(stmt, 0));
-			form = (char*) sqlite3_column_text(stmt, 0);
-
-			return form;
-
-			} else {
-
-				return form = "formato no encontrado";
-			}
-
-		sqlite3_finalize(stmt);
-}
 
 //METODO DE INSERTAR PELICULAS
 
