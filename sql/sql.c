@@ -261,28 +261,25 @@ void actualizarTitulo(char* titulo, int id_pelicula){
 
 
 void actualizarGenero(int genero, int id_pelicula){
-	char sql[] = "UPDATE Peliculas SET Cod_Gen = ? where Id_Pelicula = ?";
+	    char error = 0;
 
-		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
-		sqlite3_bind_int(stmt, 1, genero);
-		sqlite3_bind_int(stmt, 2, id_pelicula);
+	        char sql[] = "UPDATE Peliculas SET Cod_Gen ? WHERE Id_Pelicula = ?";
+	        sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
 
-		 if (result != SQLITE_OK) {
-		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+	        sqlite3_bind_int(stmt, 1, genero);
+	        sqlite3_bind_int(stmt, 2, id_pelicula);
 
-		  }
+	        result = sqlite3_step(stmt);
+	        if (result != SQLITE_DONE)
+	        {
+	            printf("Error añadiendo genero\n");
+	        }else
+	        {
+	            printf("Actualizada correcta\n");
+	        }
 
-		result = sqlite3_step(stmt);
-
-		if (result != SQLITE_DONE) {
-			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
-
-		  } else {
-			 printf("titulo actualizado\n");
-
-		  }
-
-		  sqlite3_finalize(stmt);
+	        sqlite3_finalize(stmt);
+	        sqlite3_close(db);
 
 }
 
