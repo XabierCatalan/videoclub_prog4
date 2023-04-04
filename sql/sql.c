@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../pelicula/pelicula.h"
+#include "../administrador/administrador.h"
 
 
 	sqlite3 *db;
@@ -19,33 +20,28 @@
 	int result;
 
 char** config(){
-	   FILE* f;
-	   char c;
-	   char** bdd;
-	   int fila = 0;
-    int letra = 0;
-    f = fopen("prueba.txt", "r");
-    //leer mientras no se llegue al final del fichero EOF
-    while ((c = fgetc(f)) != EOF)
-        {
-    	if(c=='\n'){
-	               fila++;
-	               letra=0;
-	            } else {
-	                bdd[fila][letra]=c;
-	                letra++;
-	            }
+	FILE *archivo = fopen("sql/prueba.txt", "r");
+	    if (archivo == NULL) {
+	        printf("No se pudo abrir el archivo.\n");
+	    }
+
+	    char linea[256];
+	    char** frase = malloc(sizeof(linea)*5);
+	    int i = 0;
+
+	    while (fgets(linea, sizeof(linea), archivo) != NULL) {
+	            frase[i]=linea;
+	            i++;
 
 	        }
-	    //cerrar fichero
-	        fclose(f);
-
-	      return bdd;
-	}
+	    return frase;
+	    fclose(archivo);
+}
 
 void inicializar()
 {
-
+//	char** frase =config();
+//	printf("%s", frase[0]);
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 
@@ -54,6 +50,36 @@ void cerrar()
 	sqlite3_close(db);
 }
 
+//INICIAR SESION
+int comprobarAdmin(char admin[], char contra[]){
+//	 Administrador a;
+	    int resultado = 0;
+
+
+	    char sql[] = "SELECT * FROM Administradores WHERE Nombre_Admin = ? AND Contra_Admin = ?";
+
+	    sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+	    sqlite3_bind_text(stmt, 1, admin, strlen(admin), SQLITE_STATIC);
+	    sqlite3_bind_text(stmt, 2, contra, strlen(contra), SQLITE_STATIC);
+
+	    result = sqlite3_step(stmt);
+
+	    if(result == SQLITE_ROW) {
+	        resultado = 1;
+	    } else {
+	        resultado = 0;
+	    }
+
+//	    a.nombre_admin = (char*) sqlite3_column_text(stmt, 1);
+//	    a.gmail_admin = (char*) sqlite3_column_text(stmt, 2);
+//	    a.contra_admin = (char*)  sqlite3_column_text(stmt, 3);
+
+	    sqlite3_finalize(stmt);
+
+	    sqlite3_close(db);
+
+	    return resultado;
+}
 
 //METODO DE CONTAR EL NUMERO DE PELICULAS
 
@@ -90,12 +116,18 @@ void cargarPeliculas()
 	do {
 			result = sqlite3_step(stmt) ;
 
-
+//			sqlite3_column_int(stmt, 0)
+//			(char*) sqlite3_column_text(stmt, 1)
 
 
 			if (result == SQLITE_ROW) {
 
-				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1) );
+				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
+
+//				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
+//						sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2))
+//						, (char*) sqlite3_column_text(stmt, 3), buscarFormato(sqlite3_column_int(stmt, 4)), sqlite3_column_double(stmt, 5),
+//						sqlite3_column_int(stmt, 6));
 			}
 		}  while (result == SQLITE_ROW);
 
@@ -161,18 +193,106 @@ void actualizarTitulo(char* titulo, int id_pelicula){
 
 
 void actualizarGenero(int genero, int id_pelicula){
+	char sql[] = "UPDATE Peliculas SET Cod_Gen = ? where Id_Pelicula = ?";
+
+		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+		sqlite3_bind_int(stmt, 1, genero);
+		sqlite3_bind_int(stmt, 2, id_pelicula);
+
+		 if (result != SQLITE_OK) {
+		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+		  }
+
+		result = sqlite3_step(stmt);
+
+		if (result != SQLITE_DONE) {
+			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+		  } else {
+			 printf("titulo actualizado\n");
+
+		  }
+
+		  sqlite3_finalize(stmt);
 
 }
 
 void actualizarDirector(char* Director, int id_pelicula){
+	char sql[] = "UPDATE Peliculas SET Director = ? where Id_Pelicula = ?";
+
+		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+		sqlite3_bind_text(stmt, 1, Director, strlen(Director), SQLITE_TRANSIENT);
+		sqlite3_bind_int(stmt, 2, id_pelicula);
+
+		 if (result != SQLITE_OK) {
+		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+		  }
+
+		result = sqlite3_step(stmt);
+
+		if (result != SQLITE_DONE) {
+			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+		  } else {
+			 printf("titulo actualizado\n");
+
+		  }
+
+		  sqlite3_finalize(stmt);
 
 }
 
 void actualizarFormato(int formato, int id_pelicula){
+	char sql[] = "UPDATE Peliculas SET Cod_For = ? where Id_Pelicula = ?";
+
+			sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+			sqlite3_bind_int(stmt, 1, formato);
+			sqlite3_bind_int(stmt, 2, id_pelicula);
+
+			 if (result != SQLITE_OK) {
+			    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+			  }
+
+			result = sqlite3_step(stmt);
+
+			if (result != SQLITE_DONE) {
+				fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+			  } else {
+				 printf("titulo actualizado\n");
+
+			  }
+
+			  sqlite3_finalize(stmt);
 
 }
 
 void actualizarPrecio(float precio, int id_pelicula){
+	char sql[] = "UPDATE Peliculas SET Precio = ? where Id_Pelicula = ?";
+
+			sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+			sqlite3_bind_double(stmt, 1, precio);
+			sqlite3_bind_int(stmt, 2, id_pelicula);
+
+			 if (result != SQLITE_OK) {
+			    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+			  }
+
+			result = sqlite3_step(stmt);
+
+			if (result != SQLITE_DONE) {
+				fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+			  } else {
+				 printf("titulo actualizado\n");
+
+			  }
+
+			  sqlite3_finalize(stmt);
 
 }
 
@@ -266,7 +386,7 @@ char* buscarFormato (int cod_for){
 //METODO DE INSERTAR PELICULAS
 
 void insertarPelicula(Pelicula p) {
-	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio"
+	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio, Cantidad"
 			") values (NULL, ?,?,?,?,?,?)";
 
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
@@ -277,13 +397,27 @@ void insertarPelicula(Pelicula p) {
 	sqlite3_bind_double(stmt,5,p.precio);
 	sqlite3_bind_double(stmt,6,p.cantidad);
 
-	result = sqlite3_step(stmt);
+
+
+	 if (result != SQLITE_OK) {
+		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+		  }
+
+		result = sqlite3_step(stmt);
+
+
+
 		if (result != SQLITE_DONE) {
-			printf("Error insertando la pelicula\n");
-		}else{
-			printf("Pelicula INSERTADA\n");
-			imprimirPeliculas(&p, 1);
-		}
+			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+		  } else {
+			 printf("titulo actualizado\n");
+			 imprimirPeliculas(&p, 1);
+		  }
+
+		  sqlite3_finalize(stmt);
+
 
 		sqlite3_finalize(stmt);
 

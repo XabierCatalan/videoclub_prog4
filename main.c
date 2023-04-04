@@ -8,7 +8,8 @@
 #include "logger/logger.c"
 
 int main(void) {
-	menuPrincipal();
+	menuInicioSesion();
+	//menuPrincipal();
 
 //	Pelicula *p;
 //	p = (Pelicula*) malloc(sizeof(Pelicula)*2);
