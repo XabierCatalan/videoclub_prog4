@@ -19,33 +19,28 @@
 	int result;
 
 char** config(){
-	   FILE* f;
-	   char c;
-	   char** bdd;
-	   int fila = 0;
-    int letra = 0;
-    f = fopen("prueba.txt", "r");
-    //leer mientras no se llegue al final del fichero EOF
-    while ((c = fgetc(f)) != EOF)
-        {
-    	if(c=='\n'){
-	               fila++;
-	               letra=0;
-	            } else {
-	                bdd[fila][letra]=c;
-	                letra++;
-	            }
+	FILE *archivo = fopen("sql/prueba.txt", "r");
+	    if (archivo == NULL) {
+	        printf("No se pudo abrir el archivo.\n");
+	    }
+
+	    char linea[256];
+	    char** frase = malloc(sizeof(linea)*5);
+	    int i = 0;
+
+	    while (fgets(linea, sizeof(linea), archivo) != NULL) {
+	            frase[i]=linea;
+	            i++;
 
 	        }
-	    //cerrar fichero
-	        fclose(f);
-
-	      return bdd;
-	}
+	    return frase;
+	    fclose(archivo);
+}
 
 void inicializar()
 {
-
+	char** frase =config();
+	printf("%s", frase[0]);
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 
