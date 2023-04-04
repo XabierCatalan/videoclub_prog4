@@ -74,7 +74,7 @@ void menuModificar() {
 
 
 
-	Pelicula* p = buscarPelicula(id_Pelicula);
+	Pelicula* peli = buscarPelicula(id_Pelicula);
 //	imprimirPeliculas(p, 1);
 
 	char opcion1;
@@ -101,10 +101,15 @@ void menuModificar() {
 
 			actualizarTitulo(titulo, id_Pelicula);
 
-			imprimirPeliculas(p);
+
+
+			imprimirPeliculas(peli);
 			break;
 
 		case '2':
+
+
+
 			printf("Seleccione el nuevo Genero de la pelicula:\n");
 			printf("1. Accion\n");
 			printf("2. Aventura\n");
@@ -116,11 +121,14 @@ void menuModificar() {
 			printf("8. Musical\n");
 			printf("9. Suspense\n");
 			printf("10. Terror\n");
+			int id = id_Pelicula;
 			int g;
 			fflush(stdout);
 			scanf("%i", &g);
 
-//			actualizarGenero(g, id_Pelicula);
+			actualizarGenero(g, id);
+
+			Pelicula* peli = buscarPelicula(id);
 
 			break;
 
@@ -155,9 +163,9 @@ void menuModificar() {
 		case '5':
 
 			printf("\n Inserte el nuevo Precio de la pelicula:\n");
-			float p;
+			float precio;
 			fflush(stdout);
-			scanf("%f", &p);
+			scanf("%f", &precio);
 
 //			actualizarPrecio(p, id_Pelicula);
 
