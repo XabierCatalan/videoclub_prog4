@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../pelicula/pelicula.h"
+#include "../administrador/administrador.h"
 
 
 	sqlite3 *db;
@@ -39,8 +40,8 @@ char** config(){
 
 void inicializar()
 {
-	char** frase =config();
-	printf("%s", frase[0]);
+//	char** frase =config();
+//	printf("%s", frase[0]);
 	sqlite3_open("sql/BDD_Prog.db", &db);
 }
 
@@ -49,6 +50,36 @@ void cerrar()
 	sqlite3_close(db);
 }
 
+//INICIAR SESION
+int comprobarAdmin(char admin[], char contra[]){
+//	 Administrador a;
+	    int resultado = 0;
+
+
+	    char sql[] = "SELECT * FROM Administradores WHERE Nombre_Admin = ? AND Contra_Admin = ?";
+
+	    sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
+	    sqlite3_bind_text(stmt, 1, admin, strlen(admin), SQLITE_STATIC);
+	    sqlite3_bind_text(stmt, 2, contra, strlen(contra), SQLITE_STATIC);
+
+	    result = sqlite3_step(stmt);
+
+	    if(result == SQLITE_ROW) {
+	        resultado = 1;
+	    } else {
+	        resultado = 0;
+	    }
+
+//	    a.nombre_admin = (char*) sqlite3_column_text(stmt, 1);
+//	    a.gmail_admin = (char*) sqlite3_column_text(stmt, 2);
+//	    a.contra_admin = (char*)  sqlite3_column_text(stmt, 3);
+
+	    sqlite3_finalize(stmt);
+
+	    sqlite3_close(db);
+
+	    return resultado;
+}
 
 //METODO DE CONTAR EL NUMERO DE PELICULAS
 
