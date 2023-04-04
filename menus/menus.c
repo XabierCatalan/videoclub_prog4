@@ -167,27 +167,6 @@ void menuModificar() {
 
 
 }
-void menuInicioSesion(){
-	inicializar();
-	char* nombreAdmin = malloc(sizeof(char)*20);
-	char* contraAdmin = malloc(sizeof(char)*20);
-	printf("\nInicia sesión como administrador \n");
-		printf("Escribe tu nombre: \n");
-		fflush(stdout);
-		scanf("%s", nombreAdmin);
-
-		printf("Escribe tu contraseña: \n");
-		fflush(stdout);
-		scanf("%s", contraAdmin);
-
-		int r = comprobarAdmin(nombreAdmin, contraAdmin);
-		if(r==1){
-			menuPrincipal();
-		} else {
-			printf("\nESTE USUARIO NO EXISTE\n");
-			menuInicioSesion();
-		}
-}
 
 void menuPrincipal(){
 	char opcion;
@@ -248,4 +227,27 @@ void menuPrincipal(){
 	} while( opcion != '5');
 
 }
+
+void menuInicioSesion(){
+	inicializar();
+	char* nombreAdmin = malloc(sizeof(char)*20);
+	char* contraAdmin = malloc(sizeof(char)*20);
+	printf("\nInicia sesión como administrador \n");
+		printf("Escribe tu nombre: \n");
+		fflush(stdout);
+		scanf("%s", nombreAdmin);
+
+		printf("Escribe tu contraseña: \n");
+		fflush(stdout);
+		scanf("%s", contraAdmin);
+
+		int r = comprobarAdmin(nombreAdmin, contraAdmin);
+		if(r==1){
+			menuPrincipal();
+		} else {
+			printf("\nESTE USUARIO NO EXISTE\n");
+			menuInicioSesion();
+		}
+}
+
 

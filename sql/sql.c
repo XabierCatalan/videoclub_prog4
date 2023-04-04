@@ -76,7 +76,7 @@ int comprobarAdmin(char admin[], char contra[]){
 
 	    sqlite3_finalize(stmt);
 
-	    sqlite3_close(db);
+
 
 	    return resultado;
 }
@@ -123,6 +123,8 @@ void cargarPeliculas()
 			if (result == SQLITE_ROW) {
 
 				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
+
+				//printf("Id_ Pelicula: %i | Titulo: %s | ",)
 
 //				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
 //						sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2))
