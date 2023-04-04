@@ -72,7 +72,9 @@ void menuModificar() {
 	fflush(stdout);
 	scanf("%i", &id_Pelicula);
 
-//	Pelicula* p = buscarPelicula(id_Pelicula);
+
+
+	Pelicula* p = buscarPelicula(id_Pelicula);
 //	imprimirPeliculas(p, 1);
 
 	char opcion1;
@@ -84,12 +86,14 @@ void menuModificar() {
 	printf("4. Formato\n");
 	printf("5. Precio\n");
 	printf("6. Volver\n");
+
+	fflush(stdout);
 	scanf("%s", &opcion1);
 
 	switch(opcion1) {
 		case '1':
 			printf("Inserte el nuevo Titulo de la pelicula:\n");
-			char *titulo;
+			char* titulo;
 			titulo = (char*) malloc(sizeof(char)*50);
 
 			fflush(stdout);
@@ -97,7 +101,7 @@ void menuModificar() {
 
 			actualizarTitulo(titulo, id_Pelicula);
 
-//			imprimirPeliculas(p, 1);
+			imprimirPeliculas(p);
 			break;
 
 		case '2':

@@ -10,20 +10,20 @@
 #include "../sql/sql.h"
 
 
-void imprimirPeliculas(Pelicula *p, int t){
+void imprimirPeliculas(Pelicula *p){
 
 
-	for (int i = 0; i < t; ++i) {
-		int id = p[i].id_pelicula;
 
-		char* gen = buscarGenero(p[i].cod_genero); //meter buscar codigo de genero
-		char* form = buscarFormato(p[i].cod_formato); //meter buscar codigo de formato
-		float precio = p[i].precio;
+		int id = p -> id_pelicula;
+
+		char* gen = buscarGenero(p -> cod_genero); //meter buscar codigo de genero
+		char* form = buscarFormato(p -> cod_formato); //meter buscar codigo de formato
+		float precio = p -> precio;
 
 		printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
-				id, p[i].titulo, gen, p[i].director, form, precio, p[i].cantidad);
+				id, p -> titulo, gen, p -> director, form, precio, p -> cantidad);
 
-	}
+
 
 
 

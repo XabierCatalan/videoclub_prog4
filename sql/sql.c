@@ -427,7 +427,7 @@ void insertarPelicula(Pelicula p) {
 
 		  } else {
 			 printf("titulo actualizado\n");
-			 imprimirPeliculas(&p, 1);
+			 imprimirPeliculas(&p);
 		  }
 
 		  sqlite3_finalize(stmt);
