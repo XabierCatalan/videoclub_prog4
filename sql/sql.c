@@ -122,9 +122,15 @@ void cargarPeliculas()
 
 			if (result == SQLITE_ROW) {
 
-				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
+//				printf("%i + %s\n", sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1));
 
-				//printf("Id_ Pelicula: %i | Titulo: %s | ",)
+				int cod_gen = sqlite3_column_int(stmt, 2);
+				int cod_for = sqlite3_column_int(stmt, 4);
+
+				printf("Id_Pelicula: %i | Titulo: %s | Genero: %i | Director: %s | Formato: %i | Precio: %.2f | Cantidad: %i \n ",
+						sqlite3_column_int(stmt,0), (char*) sqlite3_column_text(stmt, 1), sqlite3_column_int(stmt, 2),
+						(char*) sqlite3_column_text(stmt, 3), sqlite3_column_int(stmt, 4), sqlite3_column_double(stmt, 5),
+						sqlite3_column_int(stmt, 6));
 
 //				printf("Id_ Pelicula: %i | Titulo: %s | Genero: %s | Director: %s | Formato: %s | Precio: %.2f | Cantidad: %i \n",
 //						sqlite3_column_int(stmt, 0), (char*) sqlite3_column_text(stmt, 1), buscarGenero(sqlite3_column_int(stmt, 2))
