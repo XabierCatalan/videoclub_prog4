@@ -266,7 +266,7 @@ char* buscarFormato (int cod_for){
 //METODO DE INSERTAR PELICULAS
 
 void insertarPelicula(Pelicula p) {
-	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio"
+	char sql[] = "insert into Peliculas (Id_pelicula, Titulo_Pelicula, Cod_Gen, Director, Cod_For, Precio, Cantidad"
 			") values (NULL, ?,?,?,?,?,?)";
 
 	sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL) ;
@@ -277,13 +277,27 @@ void insertarPelicula(Pelicula p) {
 	sqlite3_bind_double(stmt,5,p.precio);
 	sqlite3_bind_double(stmt,6,p.cantidad);
 
-	result = sqlite3_step(stmt);
+
+
+	 if (result != SQLITE_OK) {
+		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+
+		  }
+
+		result = sqlite3_step(stmt);
+
+
+
 		if (result != SQLITE_DONE) {
-			printf("Error insertando la pelicula\n");
-		}else{
-			printf("Pelicula INSERTADA\n");
-			imprimirPeliculas(&p, 1);
-		}
+			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+		  } else {
+			 printf("titulo actualizado\n");
+			 imprimirPeliculas(&p, 1);
+		  }
+
+		  sqlite3_finalize(stmt);
+
 
 		sqlite3_finalize(stmt);
 
