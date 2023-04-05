@@ -17,10 +17,8 @@ void menuInsertar() {
 	char *director;
 	director = (char*) malloc(sizeof(char)*30);
 	int cod_form;
-	char *fecha;
-	fecha = (char*) malloc(sizeof(char)*30);
-
 	float precio;
+	int cantidad;
 
 	printf("Introduzca el titulo: \n");
 	fflush(stdout);
@@ -41,18 +39,17 @@ void menuInsertar() {
 	scanf("%i", &cod_form);
 
 
-	printf("fecha de Estreno(yyyy/mm/dd): \n");
-	fflush(stdout);
-	scanf("%s", fecha);
-
-
 	printf("Introduzca el Precio de la pelicula: \n");
 	fflush(stdout);
 	scanf("%f", &precio);
 
+	printf("Introduzca la cantidad de Stock pelicula: \n");
+	fflush(stdout);
+	scanf("%i", &cantidad);
 
 
-	Pelicula p = {0, titulo, cod_gen, director, cod_form, fecha, precio};
+
+	Pelicula p = {0, titulo, cod_gen, director, cod_form, precio, cantidad};
 
 	insertarPelicula(p);
 
@@ -65,10 +62,151 @@ void menuEliminar(){
 	scanf("%i", &id_Pelicula);
 	borrarPelicula(id_Pelicula);
 
+
+}
+
+void menuModificar() {
+	int id_Pelicula;
+
+	printf("Introduzca el Id_Pelicula de la pelicula que desee Modificar: \n");
+	fflush(stdout);
+	scanf("%i", &id_Pelicula);
+
+	int id_p = id_Pelicula;
+
+
+
+	Pelicula* peli = buscarPelicula(id_Pelicula);
+
+
+	char opcion1;
+
+	printf("Que desea actualizar de la pelicula?\n");
+	printf("1. Titulo\n");
+	printf("2. Genero\n");
+	printf("3. Director\n");
+	printf("4. Formato\n");
+	printf("5. Precio\n");
+	printf("6. Administrar cantidad\n");
+	printf("7. Volver\n");
+
+	fflush(stdout);
+	scanf("%s", &opcion1);
+
+	switch(opcion1) {
+		case '1':
+			printf("Inserte el nuevo Titulo de la pelicula:\n");
+			char* titulo;
+			titulo = (char*) malloc(sizeof(char)*50);
+
+			fflush(stdout);
+			scanf("%s", titulo);
+
+			actualizarTitulo(titulo, id_p);
+
+
+
+			buscarPelicula(id_p);
+			break;
+
+		case '2':
+
+
+
+			printf("Seleccione el nuevo Genero de la pelicula:\n");
+			printf("1. Accion\n");
+			printf("2. Aventura\n");
+			printf("3. Ciencia Ficcion\n");
+			printf("4. Comedia\n");
+			printf("5. Documentales\n");
+			printf("6. Drama\n");
+			printf("7. Fantasia\n");
+			printf("8. Musical\n");
+			printf("9. Suspense\n");
+			printf("10. Terror\n");
+
+			int g;
+			fflush(stdout);
+			scanf("%i", &g);
+
+
+
+			actualizarGenero(g, id_p);
+
+			Pelicula* peli = buscarPelicula(id_p);
+
+			break;
+
+		case '3':
+			printf("Inserte el nuevo Director de la pelicula:\n");
+			char *director;
+			director = (char*) malloc(sizeof(char)*50);
+
+			fflush(stdout);
+			scanf("%s", director);
+
+			actualizarDirector(director, id_p);
+
+			buscarPelicula(id_p);
+			break;
+
+		case '4':
+
+			printf("Seleccion el nuevo Formato de la pelicula:\n");
+			printf("1. DVD\n");
+			printf("2. Blu-Ray\n");
+			printf("3. VHS\n");
+			int f;
+			fflush(stdout);
+			scanf("%i", &f);
+
+			actualizarFormato(f, id_p);
+
+			buscarPelicula(id_p);
+
+
+			break;
+
+		case '5':
+
+			printf("\n Inserte el nuevo Precio de la pelicula:\n");
+			float precio;
+			fflush(stdout);
+			scanf("%f", &precio);
+
+			actualizarPrecio(precio, id_p);
+
+			buscarPelicula(id_p);
+
+			break;
+
+		case '6':
+
+					printf("Seleccion la nueva cantidad:\n");
+
+					int s;
+					fflush(stdout);
+					scanf("%i", &s);
+
+					actualizarStock(s, id_p);
+
+					buscarPelicula(id_p);
+
+
+					break;
+
+		case '7':
+			printf("\n Volviendo al menu principal\n");
+			break;
+	}
+
+
+
 }
 
 void menuPrincipal(){
 	char opcion;
+
 
 	do{
 		printf("\n[MENU ADMINISTRADOR] \n");
@@ -86,7 +224,7 @@ void menuPrincipal(){
 			case '1':
 
 			printf("La opcion elegida es 1.\n");
-			inicializar();
+
 			cargarPeliculas();
 
 			break;
@@ -99,7 +237,8 @@ void menuPrincipal(){
 
 			case '3':
 
-			printf("La opcion elegida es 3.\n");
+				printf("La opcion elegida es 3.\n");
+				menuModificar();
 			break;
 
 			case '4':
@@ -124,4 +263,27 @@ void menuPrincipal(){
 	} while( opcion != '5');
 
 }
+
+void menuInicioSesion(){
+	inicializar();
+	char* nombreAdmin = malloc(sizeof(char)*20);
+	char* contraAdmin = malloc(sizeof(char)*20);
+	printf("Inicia sesión como administrador \n");
+		printf("Escribe tu nombre: \n");
+		fflush(stdout);
+		scanf("%s", nombreAdmin);
+
+		printf("Escribe tu contraseña: \n");
+		fflush(stdout);
+		scanf("%s", contraAdmin);
+
+		int r = comprobarAdmin(nombreAdmin, contraAdmin);
+		if(r==1){
+			menuPrincipal();
+		} else {
+			printf("\nESTE USUARIO NO EXISTE\n");
+			menuInicioSesion();
+		}
+}
+
 
