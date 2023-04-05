@@ -361,6 +361,29 @@ void actualizarPrecio(float precio, int id_pelicula){
 
 }
 
+void actualizarStock(int stock, int id_pelicula){
+
+	char sql[] = "UPDATE Peliculas SET Cantidad = ? where Id_Pelicula = ?";
+
+		sqlite3_prepare_v2(db, sql, strlen(sql), &stmt, NULL);
+		sqlite3_bind_int(stmt, 1, stock);
+		sqlite3_bind_int(stmt, 2, id_pelicula);
+		 if (result != SQLITE_OK) {
+		    fprintf(stderr, "Error en la consulta: %s\n", sqlite3_errmsg(db));
+		  }
+		result = sqlite3_step(stmt);
+		if (result != SQLITE_DONE) {
+			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
+
+		  } else {
+
+			 printf("genero actualizado\n");
+
+		  }
+
+		  sqlite3_finalize(stmt);
+}
+
 
 
 

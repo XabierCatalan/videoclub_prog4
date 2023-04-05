@@ -36,6 +36,8 @@ void actualizarFormato(int formato, int id_pelicula);
 
 void actualizarPrecio(float precio, int id_pelicula);
 
+void actualizarStock(int stock, int id_pelicula);
+
 
 void cerrar();
 

@@ -87,7 +87,8 @@ void menuModificar() {
 	printf("3. Director\n");
 	printf("4. Formato\n");
 	printf("5. Precio\n");
-	printf("6. Volver\n");
+	printf("6. Administrar cantidad\n");
+	printf("7. Volver\n");
 
 	fflush(stdout);
 	scanf("%s", &opcion1);
@@ -180,6 +181,21 @@ void menuModificar() {
 			break;
 
 		case '6':
+
+					printf("Seleccion la nueva cantidad:\n");
+
+					int s;
+					fflush(stdout);
+					scanf("%i", &s);
+
+					actualizarStock(s, id_p);
+
+					buscarPelicula(id_p);
+
+
+					break;
+
+		case '7':
 			printf("\n Volviendo al menu principal\n");
 			break;
 	}
@@ -252,7 +268,7 @@ void menuInicioSesion(){
 	inicializar();
 	char* nombreAdmin = malloc(sizeof(char)*20);
 	char* contraAdmin = malloc(sizeof(char)*20);
-	printf("\nInicia sesión como administrador \n");
+	printf("Inicia sesión como administrador \n");
 		printf("Escribe tu nombre: \n");
 		fflush(stdout);
 		scanf("%s", nombreAdmin);
