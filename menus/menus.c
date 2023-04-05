@@ -72,6 +72,8 @@ void menuModificar() {
 	fflush(stdout);
 	scanf("%i", &id_Pelicula);
 
+	int id_p = id_Pelicula;
+
 
 
 	Pelicula* peli = buscarPelicula(id_Pelicula);
@@ -121,14 +123,16 @@ void menuModificar() {
 			printf("8. Musical\n");
 			printf("9. Suspense\n");
 			printf("10. Terror\n");
-			int id = id_Pelicula;
+			//int id = id_Pelicula;
 			int g;
 			fflush(stdout);
 			scanf("%i", &g);
 
-			actualizarGenero(g, id);
 
-			Pelicula* peli = buscarPelicula(id);
+
+			actualizarGenero(g, id_p);
+
+			Pelicula* peli = buscarPelicula(id_p);
 
 			break;
 

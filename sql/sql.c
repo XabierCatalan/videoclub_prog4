@@ -278,7 +278,7 @@ void actualizarGenero(int genero, int id_pelicula){
 			fprintf(stderr, "Error en la actualización: %s\n", sqlite3_errmsg(db));
 
 		  } else {
-			 printf("titulo actualizado\n");
+			 printf("genero actualizado\n");
 
 		  }
 
@@ -386,9 +386,14 @@ Pelicula* buscarPelicula(int id){
 	p->precio = sqlite3_column_double(stmt, 5);
 	p->cantidad = sqlite3_column_int(stmt, 6);
 
+	imprimirPeliculas(p);
+
 	sqlite3_finalize(stmt);
 
-	imprimirPeliculas(p);
+
+
+
+
 
 	return p;
 
