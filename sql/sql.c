@@ -20,30 +20,59 @@
 
 	int result;
 
-char** config(){
-	FILE *archivo = fopen("sql/prueba.txt", "r");
+	char* load_config(char* filename, char* buscar) {
+	    FILE* archivo;
+	    char linea[100];
+	    char* igual;
+	    char buscar2[20];
+	    fflush(stdout);
+	    archivo = fopen(filename, "r");
+
 	    if (archivo == NULL) {
-	        printf("No se pudo abrir el archivo.\n");
+	        printf("Error al abrir el archivo.\n");
+	        return NULL;
+	    }
+	    fflush(stdout);
+	    char* resultado = NULL;
+	    while (fgets(linea, 100, archivo)) {
+	        int i = 0;
+	        while (linea[i] != '=') {
+	            buscar2[i] = linea[i];
+	            i++;
+	        }
+	        buscar2[i] = '\0';
+
+	        if (strcmp(buscar, buscar2) == 0) {
+	            igual = strchr(linea, '=');
+	            if (igual != NULL) {
+	                int longitud = strlen(igual + 1);
+	                resultado = (char*) realloc(resultado, longitud * sizeof(char));
+	                if (resultado == NULL) {
+	                    printf("Error al asignar memoria.\n");
+	                    return NULL;
+	                }
+	                fflush(stdout);
+	                strncpy(resultado, igual + 1, longitud);
+	                resultado[longitud - 1] = '\0';
+	            }
+	        }
 	    }
 
-	    char linea[256];
-	    char** frase = malloc(sizeof(linea)*5);
-	    int i = 0;
-
-	    while (fgets(linea, sizeof(linea), archivo) != NULL) {
-	            frase[i]=linea;
-	            i++;
-
-	        }
-	    return frase;
 	    fclose(archivo);
-}
+	    fflush(stdout);
+	    return resultado;
+	}
 
 void inicializar()
 {
 //	char** frase =config();
 //	printf("%s", frase[0]);
-	sqlite3_open("sql/BDD_Prog.db", &db);
+	char*rutaBDD=load_config("sql/prueba.txt","rutaBDD");
+
+	    sqlite3_open(rutaBDD, &db);
+	    free(rutaBDD);
+
+
 }
 
 void cerrar()

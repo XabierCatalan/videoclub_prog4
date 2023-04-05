@@ -1,2 +1,1 @@
-sql/BDD_Prog.db
-hola
+rutaBDD=sql/BDD_Prog.db
