@@ -77,7 +77,7 @@ void menuModificar() {
 
 
 	Pelicula* peli = buscarPelicula(id_Pelicula);
-//	imprimirPeliculas(p, 1);
+
 
 	char opcion1;
 
@@ -101,11 +101,11 @@ void menuModificar() {
 			fflush(stdout);
 			scanf("%s", titulo);
 
-			actualizarTitulo(titulo, id_Pelicula);
+			actualizarTitulo(titulo, id_p);
 
 
 
-			imprimirPeliculas(peli);
+			buscarPelicula(id_p);
 			break;
 
 		case '2':
@@ -123,7 +123,7 @@ void menuModificar() {
 			printf("8. Musical\n");
 			printf("9. Suspense\n");
 			printf("10. Terror\n");
-			//int id = id_Pelicula;
+
 			int g;
 			fflush(stdout);
 			scanf("%i", &g);
@@ -144,9 +144,9 @@ void menuModificar() {
 			fflush(stdout);
 			scanf("%s", director);
 
-			actualizarDirector(director, id_Pelicula);
+			actualizarDirector(director, id_p);
 
-//			imprimirPeliculas(p, 1);
+			buscarPelicula(id_p);
 			break;
 
 		case '4':
@@ -159,7 +159,9 @@ void menuModificar() {
 			fflush(stdout);
 			scanf("%i", &f);
 
-//			actualizarFormato(f, id_Pelicula);
+			actualizarFormato(f, id_p);
+
+			buscarPelicula(id_p);
 
 
 			break;
@@ -171,7 +173,9 @@ void menuModificar() {
 			fflush(stdout);
 			scanf("%f", &precio);
 
-//			actualizarPrecio(p, id_Pelicula);
+			actualizarPrecio(precio, id_p);
+
+			buscarPelicula(id_p);
 
 			break;
 
